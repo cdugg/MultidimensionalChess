@@ -1,0 +1,109 @@
+<!-- Nav bar credit https://bootsnipp.com/snippets/kl8Q3-->
+<!Doctype HTML>
+<html>
+    <html lang="en">
+    <head>
+    	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="Page Icon" href="../Images/Chess.ico" />
+        <title>Higher Dimensions of Chess</title>
+    	<link rel="stylesheet" href="../CSS/Home.css">
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="../JavaScript/3DChess/navscroll.js"></script>
+    </head>
+    
+    <body>
+    <header>
+        <nav>
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <div class="logo">
+                LOGO
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#">3D Games</a></li>
+                    <li><a href="#">4D Games</a></li>
+                    <li><a href="#">Higher Games</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class = "Description">
+    <h1>What the heck is Higher Dimensional Chess?</h1>
+    <p>The classical version of chess is set in 2 dimensions, aka an x and a y axis. In the game these are refered to as ranks and file. Ranks are numbered from 1-8 and files are lettered from a-h. These 64 possitions make up the usual 2 dimensional chess board and because it is a contained environment we can expand it into higher dimensions more easily and display them in a way that we can actually understand as humans living in the third dimension.</p>
+    <p>Ok cool so we can view higher dimensional chess games but what would they look like. Well to explain we will start with the easiest for humans to understand, the 3rd dimension of chess. I'll start off by noting there are tournament rules for 3 dimensional chess that are different and don't fit the concept for fourth, fifth, and higher dimensions of the game. With that done lets go into conceptual 3 dimensional chess. Starting with the board, we typically have an 8x8 board. If we add a third dimension to the classic board it becomes an 8x8x8 cube where each 1x1x1 area represents a sqare for a piece to be placed on. So now instead of having only an x and y position using ranks and files we have 3 values, an x, y, and z. To simplify it we will get rid of the lettering system used for files and replace it with a number and contain the sqare location of each piece in a 3x1 matrix whcih we will represent using [x,y,z]. Each value of x, y, and z can range from 1-8 giving us every square available inside the chess cube. So now that we understand the boardstate how do we move pieces?</p>
+    <p>Lets go back to the 2 dimensional chess board and represent piece movement as a 2x1 matrix of [x,y]. In 2 dimensions the piecs can move as follows:</p>
+    <ul>
+        <li>Pawn:   [x, y-> y + 1] or if first move [x, y -> y + (1,2)] or if capturing a piece [x -> x + 1, y -> y + 1]</li>
+        <li>Rook:   [x -> x + (-7:7), y] or [x, y -> y + (-7:7)] when unobstructed</li>
+        <li>Knight: [x -> x + (-1,1), y -> y + (-2,2)] or [x -> x + (-2,2), y -> y + (-1,1)] can not be obstructed by other pieces in path</li>
+        <li>Bishop: [x -> x + z, y -> y + z where z = [-7:7]] when unobstructed</li>
+        <li>Queen:  Rook and Bishop movement combined</li>
+        <li>King:   Queen movement but only 1 square at a time</li>
+    </ul>
+    <p>
+        With this information we can move to the next dimension (the third) and attempt to apply the same rules using the matrix representation of piece location.
+        Lets start with the rook. In the second dimension the rook can move in a straight line across one dimension. For example if we move it from [1,1] to [8,1] the rook has moved 7 spaces across the x dimension. So we can infer that a rook has the ability to move across any single dimension so long as it is unobstructed. This would mean that every dimension regardless of number retains the rule that the rook can move across one dimension. This would look something like this:
+    </p>
+    <ul>
+        <li>Rook:   [x -> x + (-7:7), y, z] or [x, y -> y + (-7:7), z] or [x, y, z -> z + (-7:7)] when unobstructed</li>
+    </ul>
+    <p>
+        Next we will take a look at the bishop which may be slightly more complicated than the rook. In the second dimension the rook can move diagonally along two dimensions. This means any change in x must also be applied to y. However, when we rise to the third dimension we still want the bishop to be able to move diagonally across our cube chess board. In this case any movement applied to x would need to be applied to y and z as well. From this information we can determine that each time a new dimension is added the bishop can move across 2 dimensions using x:y movement, 3 dimensions using x:y:z movement, and n dimensions using x:y:z...n movement. This will be explained in further depth using the 4th dimension example later on. For the third dimension's purposes the bishop movement would look like:
+    </p>
+    <ul>
+        <li>Bishop: [x -> x + n, y -> y + n, z where n = (-7:7)] or [x -> x + n, y -> y + n, z -> z + n where n = (-7:7)]</li>
+    </ul>
+    <p>
+        Now for the knight which is the best option for conceptualizing higher dimensional games. Looking at the rook in the second dimension it can move 1 space in one dimension and 2 spaces in the other dimension. The knight although seemingly complicated may be the simplest piece for higher dimensional chess as the rules for movement never change for it. Whatever dimension you are playing in the rook can move 1 space in one dimension and 2 spaces in any other dimension. This would look something like this:
+    </p>
+    <ul>
+        <li>Knight: [x -> x + (-1,1), y -> y + (-2,2), z] or [x -> x + (-2,2), y -> y + (-1,1), z] or [x -> x + (-1,1), y, z -> z + (-2,2)] etc.</li>
+    </ul>
+    <p>Similar to the second dimension, for every higher dimension the Queen inherits movement from the rook and bishop's defenitions and the King inherits from the Queen, but is restricted to one square of movement at a time.</p>
+    <p>The last piece we have to define is the Pawn. Useful for holding territory in 2 dimensional chess, but far more dangerous as the dimensions grow. In the second dimension the Pawn could move forward and take diagonally. Following that definition we can determine that the third dimensional pawn can move up the board on the files as well as up the z axis to meet the opponent across the cube. It can also take using any forward diagonal movement in 2 or three dimensions. From this definition we can infer that the Pawn can move in any dimension in the positive direction, but can never move along the x axis unless taking a piece. This would look something like this:</p>
+    <ul>
+        <li>Pawn:   [x, y -> y + 1, z] or [x, y -> y + 1, z -> z + 1] or [x, y, z -> z + 1]</li>
+        <li>        First move: [x, y -> y + (1:2), z] or [x, y -> y + (1:2), z -> z + (1:2)] or [x, y, z -> z + (1:2)]</li>
+        <li>        Taking: [x -> x + (-1,1), y -> y + 1, z] or [x -> x + (-1,1), y, z -> z + 1] or [x -> x + (-1,1), y -> y + 1, z -> z + 1]</li>
+    </ul>
+    <p></p>
+    <h2>Ok finally 3D done what next?</h2>
+    <p>Well from there we can move on to 4th dimension as well as 3 dimensional tournament rules and variations of 3/4/5 dimensional games. Lets proceed with the fourth dimension. Spooky I know but because we are working with a finite area we can actually visualize it which is pretty cool.</p>
+    <p>Let's start with an explanation of how you can vissualize our board as that might be the most confusing part. If we look at the 3 dimensional chess board and tried to represent it in two dimensions we would have 8 separate chess boards layed out representing each of the 8 spaces available in the third dimension. Lets call this two dimensional respresentation the "shadow" of the third dimensional chess cube. Similar to the way we created a shadow of the chess cube we can make a shadow of the 4th dimensional board to visualize and play on. By taking the 8x8x8 cube and creating 8 8x8 boards instead we created a shadow in the second dimension so we will apply the same logic to the 4th. We take the 8x8x8x8 4th dimensional board and create the shadow of the board and represent it using 8 8x8x8 cube boards. Now we can visualize our fourth dimensional board. However, this leaves us with 4,096 squares to move to so the game will take a very long time and wont be particularly entertaining. To make it a bit more fun we will reduce the board size to 4x4x4x4 giving us 256 spaces which is actually half of the spaces available in the 8x8x8 cube. From here we can line up our pieces, define the movement rules, and play a game in 4 dimensions. Two different variations can be used here with additional pieces if you want but for simplicity sake let's start with the normal piece set. To place our pieces we will have all the white pieces on the first shadow cube while all the black pieces will be located on the 4th shadow cube. Each shadow cube as combined they are a representation of our fourth dimension will represent w in our 4x1 location matricies. [x,y,z,w] Additionally as we are playing in 4x4x4x4 our piece movement is restricted to allow movement only so long as no number in the matrix exceeds 4 and can not go below 1. So now what? Well, once again we have to define the movement of each piece. Luckily the rules that we determined for rising dimensions previously can be applied the same way here.</p>
+    <p>We will once again start with the rook as it is the simplest. Once again the rook can move accross the board in a straight line through a single dimension. This looks like this:</p>
+    <ul>
+        <li>Rook:   [x -> x + (-3:3), y, z, w] or [x, y -> y + (-3:3), z, w] or [x, y, z -> z + (-3:3), w] or [x, y, z, w -> w + (-3:3)]</li>
+    </ul>
+    <p>Next up is the Bishop again similar to before the bishop retains all of its movement ability from before while adding the ability to move diagonally in the 4th dimension. This would look like this:</p>
+    <ul>
+        <li>Bishop: [x -> x + n, y -> y + n, z, w where n = (-3:3)] or [x -> x + n, y -> y + n, z -> z + n, w where n = (-3:3)] or [x -> x + n, y -> y + n, z -> z + n, w -> w + n where n = (-3:3)]</li>
+    </ul>
+    <p>Following the bishop is the Knight whos movements retain the same definition as before. Move 1 space through one dimension and 2 spaces through a second dimension. This would look like this:</p>
+    <ul>
+        <li>Knight: [x -> x + (-1,1), y -> y + (-2,2), z, w] or [x -> x + (-2,2), y -> y + (-1,1), z, w] or [x -> x + (-1,1), y, z -> z + (-2,2), w] or [x -> x + (-1,1), y, z, w -> w + (-2,2)] etc.</li>
+    </ul>
+    <p>The Queen and King once again inherit their movement from the rook and bishop where the king can only move one space.</p>
+    <p>Finally is the fourth dimensional pawn. </p>
+    <ul>
+        <li>Pawn:   [x, y -> y + 1, z, w] or [x, y -> y + 1, z -> z + 1, w] or [x, y, z -> z + 1, w] or [x, y, z, w-> w + 1] or [x, y -> y + 1, z, w-> w + 1] or [x, y, z -> z + 1, w-> w + 1] or [x, y -> y + 1, z -> z + 1, w-> w + 1]</li>
+        <li>        First move: [x, y -> y + (1,2), z, w] or [x, y -> y + (1,2), z -> z + (1,2), w] or [x, y, z -> z + (1,2), w] or [x, y, z, w-> w + (1,2)] or [x, y -> y + (1,2), z, w-> w + (1,2)] or [x, y, z -> z + (1,2), w-> w + (1,2)] or [x, y -> y + (1,2), z -> z + (1,2), w-> w + (1,2)]</li>
+        <li>        Taking: [x -> x + (-1,1), y -> y + 1, z, w] or [x -> x + (-1,1), y -> y + 1, z -> z + 1, w] or [x -> x + (-1,1), y, z -> z + 1, w] or [x -> x + (-1,1), y, z, w-> w + 1] or [x -> x + (-1,1), y -> y + 1, z, w-> w + 1] or [x -> x + (-1,1), y, z -> z + 1, w-> w + 1] or [x -> x + (-1,1), y -> y + 1, z -> z + 1, w-> w + 1]</li>
+    </ul>
+    <p>Now that all looks very spooky but I promise in implementation it is actually relatively straight forward. Time for the important question.</p>
+    <h2>Can we go higher?</h2>
+    <p>Well my friend I'm glad you asked. Using the methods previously described to determine movements of each peice we can theoretically take this game into any dimension so long as the rules are applied to the matricies properly. This means in theory we could play 5, 6, 7, even 36 dimensional chess should we want to. However, the issue that arises is why. There is not much value or fun to be had in a game higher than the fourth dimension using the increasing dimensional rules defined previously. While it could work and would be playable the board would consist of 32,000+ squares for 5 dimensional 8x8s and 1024 squares for 5 dimensional 4x4s. At that point there are too many squares available for the game to progress at a reasonable pace and there would be very little interaction between opponents pieces. The theory stands, but it wouldn't be much fun. For those looking for a fifth dimensional game I have proposed adding time as the fifth dimension. Doing this would keep the game somewhat interactive while adding an entirely new challenge. To do this we would use previous board states as our fifth dimension meaning that our matrix would look like [x, y, z, w, t] where t is the time dimension and can only move backward. Moving about the 5th dimension would create a secondary board state where the piece moved now exists twice while it doesn't exist on the current board. This would create two separate board states that would need to be played simultaneously. To win a player simply needs to checkmate a kind on any of the current time dimensional boards. However, the king can't be able to escape to the previous move and escape check. It is far more complex and requires significant computing power to implement so I will not be providing an option to play here, but I will provide and example game for you to run through if you want to further understand the concept behind the game.</p>
+    <h2>Ready to play?</h2>
+    <p>With all this information its time for you to see how you stack up. Head over to one of the dimensional games and see if you can beat a friend.</p>
+	</div>
+	</body>
+</html>
